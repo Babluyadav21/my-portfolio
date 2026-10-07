@@ -1,0 +1,12 @@
+@keyframes marquee { to { transform: translateX(-50%); } }
+@keyframes blink { 50% { opacity: .25; } }
+.marquee { overflow: hidden; border-block: 1px solid var(--border); background: var(--surface); padding: 22px 0;
+  &-track { display: flex; width: max-content; animation: marquee 30s linear infinite; }
+  &:hover &-track { animation-play-state: paused; }
+  span { padding: 0 28px; font-size: clamp(22px, 3.4vw, 38px); font-weight: 700; letter-spacing: -.02em; color: var(--muted); white-space: nowrap;
+    &::after { content: '/'; margin-left: 56px; color: var(--accent); } } }
+.blink { animation: blink 1.4s steps(2) infinite; }
+.cursor-dot { position: fixed; left: 0; top: 0; z-index: 200; pointer-events: none;
+  &::before { content: ''; position: absolute; width: 10px; height: 10px; margin: -5px 0 0 -5px; border-radius: 50%; background: var(--accent); transition: transform .2s, opacity .2s; }
+  &[data-h='true']::before { transform: scale(4); opacity: .35; } }
+@media (prefers-reduced-motion: reduce) { .marquee-track, .blink { animation: none; } }
